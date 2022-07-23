@@ -1,0 +1,9 @@
+{
+  "name": "use_deall_tech_test",
+  "private":true,
+  "workspaces": {
+    "packages": [
+      "packages/services/*"
+    ]
+  }
+}
