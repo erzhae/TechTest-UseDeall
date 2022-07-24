@@ -1,0 +1,18 @@
+services:
+  app:
+    container_name: auth_service
+    restart: always
+    build: .
+    env_file: .env
+    environment:
+      - PORT=${PORT}
+      - DATABASE_URL=${DATABASE_URL}
+    ports:
+      - "4000:4000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"

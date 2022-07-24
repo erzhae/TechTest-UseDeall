@@ -1,8 +1,6 @@
 import express from 'express'
 import type { Application, Request, Response } from 'express'
-
-import auth from './auth'
-import token from './token'
+import user from './user'
 
 const app: Application = express()
 app.use(express.json())
@@ -10,12 +8,11 @@ app.use(express.json())
 app.get('/', (req: Request, res: Response) => {
   return res.json({
     code: 200,
-    message: 'Welcome to auth service!'
+    message: 'Welcome to user service!'
   })
 })
 
-app.use('/auth', auth)
-app.use('/token', token)
+app.use('/user', user)
 
 
 export default app

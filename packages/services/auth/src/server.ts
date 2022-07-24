@@ -1,5 +1,5 @@
 import app from './app'
-import {env} from './conf'
+import { env } from './conf'
 
 const PORT = env.port
 const ENV_NAME = env.name
@@ -12,6 +12,6 @@ const startServer = async () => {
   })
 }
 
-startServer().catch(err => {
+startServer().catch((err) => {
   throw err
 })

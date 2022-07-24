@@ -9,3 +9,45 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum TokenStatus {
+  ACTIVE
+  REFRESHED
+  INACTIVE
+}
+
+model UserCredential {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+  password String
+
+  userRole  UserRole    @map("user_role")
+  userToken UserToken[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("user_credential")
+}
+
+model UserToken {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  credentialId String      @map("_credential_id")
+  token        String
+  refreshToken String      @map("refresh_token")
+  tokenStatus  TokenStatus @default(ACTIVE) @map("token_status")
+
+  userCredential UserCredential @relation(fields: [credentialId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@unique([credentialId, token])
+  @@map("user_token")
+}
