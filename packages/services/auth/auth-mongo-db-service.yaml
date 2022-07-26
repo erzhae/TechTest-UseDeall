@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: auth-mongo-db
+  name: auth-mongo-db
+spec:
+  ports:
+    - protocol: TCP
+      name: "27018"
+      port: 27018
+      targetPort: 27017
+  type: NodePort
+  selector:
+    io.kompose.service: auth-mongo-db
+status:
+  loadBalancer: {}

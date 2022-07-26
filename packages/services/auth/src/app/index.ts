@@ -1,7 +1,7 @@
 import express from 'express'
 import type { Application, Request, Response } from 'express'
 
-import auth from './auth'
+import credential from './credential'
 import token from './token'
 
 const app: Application = express()
@@ -14,7 +14,7 @@ app.get('/', (req: Request, res: Response) => {
   })
 })
 
-app.use('/auth', auth)
+app.use('/credential', credential)
 app.use('/token', token)
 
 

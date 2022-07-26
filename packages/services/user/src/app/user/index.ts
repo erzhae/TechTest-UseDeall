@@ -1,19 +1,18 @@
-import {Router} from 'express'
-import userCreate from './create'
-import userDelete from './remove'
-import userUpdate from './update'
+import { Router } from 'express'
+import create from './create'
+import update from './update'
 
-import userList from './list'
-import userDetail from './detail'
+import list from './list'
+import detail from './detail'
+
+import { passport } from './../../loader'
 
 const user = Router()
 
-user.get('/list', userDetail)
-user.get('/detail', userDetail)
+user.get('/list', passport.authorize('jwt', { session: false }), list)
+user.get('/', passport.authorize('jwt', { session: false }), detail)
 
-user.post('/create', userCreate)
-user.put('/update', userUpdate)
-user.delete('/delete', userCreate)
-
+user.post('/create', passport.authorize('jwt', { session: false }), create)
+user.put('/update', passport.authorize('jwt', { session: false }), update)
 
 export default user

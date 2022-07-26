@@ -4,7 +4,7 @@ import refresh from './refresh'
 
 const token = Router()
 
-token.use('/authorize', authorize)
+token.get('/authorize/:token', authorize)
 token.post('/refresh', refresh)
 
 export default token

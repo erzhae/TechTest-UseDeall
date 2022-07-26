@@ -14,5 +14,4 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/user', user)
 
-
 export default app

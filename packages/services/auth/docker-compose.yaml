@@ -1,18 +1,16 @@
+version: '3'
 services:
-  app:
-    container_name: auth_service
+  auth-mongo-db:
+    container_name: auth-mongo-db
+    image: mongo
+    ports:
+      - "27018:27017"
+  auth-backend:
+    container_name: auth-backend
     restart: always
     build: .
     env_file: .env
-    environment:
-      - PORT=${PORT}
-      - DATABASE_URL=${DATABASE_URL}
     ports:
-      - "4000:4000"
+      - "4001:4000"
     links:
       - mongo
-  mongo:
-    container_name: mongo
-    image: mongo
-    ports:
-      - "27017:27017"
